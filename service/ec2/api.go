@@ -42827,6 +42827,10 @@ func (s Instance) GoString() string {
 	return s.String()
 }
 
+func (s *Instance) Reference() interface{} {
+	return s.InstanceId
+}
+
 // SetAmiLaunchIndex sets the AmiLaunchIndex field's value.
 func (s *Instance) SetAmiLaunchIndex(v int64) *Instance {
 	s.AmiLaunchIndex = &v
@@ -50535,6 +50539,13 @@ func (s Reservation) String() string {
 // GoString returns the string representation
 func (s Reservation) GoString() string {
 	return s.String()
+}
+
+func (s *Reservation) Reference() interface{} {
+	if len(s.Instances) > 0 {
+		s.Instances.Reference()
+	}
+	return nil
 }
 
 // SetGroups sets the Groups field's value.

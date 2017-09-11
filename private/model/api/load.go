@@ -70,5 +70,13 @@ func (a *API) Setup() {
 		a.addShapeValidations()
 	}
 
+	if !a.NoReferenceMethods {
+		a.addReferences()
+	}
+	/*
+		if !a.NoAttrabuteMethods {
+			a.addAttrabutes()
+		}
+	*/
 	a.initialized = true
 }

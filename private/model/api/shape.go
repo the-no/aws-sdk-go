@@ -59,6 +59,8 @@ type Shape struct {
 	KeyRef           ShapeRef             `json:"key"`
 	ValueRef         ShapeRef             `json:"value"`
 	Required         []string
+	Reference        string
+	Attrabute        []string
 	Payload          string
 	Type             string
 	Exception        bool
@@ -84,6 +86,8 @@ type Shape struct {
 	Deprecated bool `json:"deprecated"`
 
 	Validations ShapeValidations
+
+	ReferenceAction *ShapeReference
 
 	// Error information that is set if the shape is an error shape.
 	IsError   bool
@@ -559,7 +563,16 @@ type {{ .ShapeName }} struct {
 {{ if not .API.NoStringerMethods }}
 	{{ .GoCodeStringers }}
 {{ end }}
+
 {{ if not .API.NoValidataShapeMethods }}
+	{{ if .ReferenceAction -}}
+	func (s *{{ .ShapeName }}) Reference() interface{} {
+		{{ .ReferenceAction.GoCode . }}
+	}
+	{{ end }}
+{{ end }}
+
+{{ if not .API.NoReferenceMethods }}
 	{{ if .Validations -}}
 		{{ .Validations.GoCode . }}
 	{{ end }}
@@ -640,6 +653,19 @@ func (s *Shape) IsEnum() bool {
 // IsRequired returns if member is a required field.
 func (s *Shape) IsRequired(member string) bool {
 	for _, n := range s.Required {
+		if n == member {
+			return true
+		}
+	}
+	return false
+}
+
+func (s *Shape) IsReference(member string) bool {
+	return s.Reference == member
+}
+
+func (s *Shape) IsAttrabute(member string) bool {
+	for _, n := range s.Attrabute {
 		if n == member {
 			return true
 		}

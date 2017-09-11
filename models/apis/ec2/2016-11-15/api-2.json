@@ -9245,7 +9245,9 @@
           "shape":"VirtualizationType",
           "locationName":"virtualizationType"
         }
-      }
+      },
+      "reference":"InstanceId",
+      "attrabute":["PublicDnsName"]
     },
     "InstanceAttribute":{
       "type":"structure",
@@ -12502,7 +12504,10 @@
           "shape":"String",
           "locationName":"reservationId"
         }
-      }
+      },
+      "reference":"Instances",
+      "attrabute":["Instances"]
+
     },
     "ReservationList":{
       "type":"list",
