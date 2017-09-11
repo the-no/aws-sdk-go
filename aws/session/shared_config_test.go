@@ -5,9 +5,9 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/go-ini/ini"
 	"github.com/stretchr/testify/assert"
+	"github.com/the-no/aws-sdk-go/aws/credentials"
 )
 
 var (

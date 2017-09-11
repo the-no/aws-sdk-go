@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/aws/aws-sdk-go/aws/awserr"
-	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/go-ini/ini"
+	"github.com/the-no/aws-sdk-go/aws/awserr"
+	"github.com/the-no/aws-sdk-go/aws/credentials"
 )
 
 const (

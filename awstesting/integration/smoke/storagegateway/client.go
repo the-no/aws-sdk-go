@@ -4,9 +4,9 @@
 package storagegateway
 
 import (
-	"github.com/aws/aws-sdk-go/awstesting/integration/smoke"
-	"github.com/aws/aws-sdk-go/service/storagegateway"
 	"github.com/gucumber/gucumber"
+	"github.com/the-no/aws-sdk-go/awstesting/integration/smoke"
+	"github.com/the-no/aws-sdk-go/service/storagegateway"
 )
 
 func init() {

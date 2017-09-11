@@ -3,8 +3,8 @@ package credentials
 import (
 	"testing"
 
-	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/stretchr/testify/assert"
+	"github.com/the-no/aws-sdk-go/aws/awserr"
 )
 
 type secondStubProvider struct {

@@ -4,10 +4,10 @@
 package applicationdiscoveryservice
 
 import (
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/awstesting/integration/smoke"
-	"github.com/aws/aws-sdk-go/service/applicationdiscoveryservice"
 	"github.com/gucumber/gucumber"
+	"github.com/the-no/aws-sdk-go/aws"
+	"github.com/the-no/aws-sdk-go/awstesting/integration/smoke"
+	"github.com/the-no/aws-sdk-go/service/applicationdiscoveryservice"
 )
 
 func init() {

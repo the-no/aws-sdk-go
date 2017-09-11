@@ -7,16 +7,16 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/aws/aws-sdk-go/aws/client/metadata"
-	"github.com/aws/aws-sdk-go/aws/request"
-	"github.com/aws/aws-sdk-go/awstesting"
-	"github.com/aws/aws-sdk-go/private/protocol"
-	"github.com/aws/aws-sdk-go/private/protocol/ec2query"
-	"github.com/aws/aws-sdk-go/private/protocol/jsonrpc"
-	"github.com/aws/aws-sdk-go/private/protocol/query"
-	"github.com/aws/aws-sdk-go/private/protocol/rest"
-	"github.com/aws/aws-sdk-go/private/protocol/restjson"
-	"github.com/aws/aws-sdk-go/private/protocol/restxml"
+	"github.com/the-no/aws-sdk-go/aws/client/metadata"
+	"github.com/the-no/aws-sdk-go/aws/request"
+	"github.com/the-no/aws-sdk-go/awstesting"
+	"github.com/the-no/aws-sdk-go/private/protocol"
+	"github.com/the-no/aws-sdk-go/private/protocol/ec2query"
+	"github.com/the-no/aws-sdk-go/private/protocol/jsonrpc"
+	"github.com/the-no/aws-sdk-go/private/protocol/query"
+	"github.com/the-no/aws-sdk-go/private/protocol/rest"
+	"github.com/the-no/aws-sdk-go/private/protocol/restxml"
+	"github.com/the-nothe-no/aws-sdk-go/private/protocol/restjson"
 )
 
 func xmlData(set bool, b []byte, size, delta int) {

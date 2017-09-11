@@ -4,9 +4,9 @@
 package lambda
 
 import (
-	"github.com/aws/aws-sdk-go/awstesting/integration/smoke"
-	"github.com/aws/aws-sdk-go/service/lambda"
 	"github.com/gucumber/gucumber"
+	"github.com/the-no/aws-sdk-go/awstesting/integration/smoke"
+	"github.com/the-no/aws-sdk-go/service/lambda"
 )
 
 func init() {

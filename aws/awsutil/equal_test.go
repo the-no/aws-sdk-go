@@ -3,9 +3,9 @@ package awsutil_test
 import (
 	"testing"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/awsutil"
 	"github.com/stretchr/testify/assert"
+	"github.com/the-no/aws-sdk-go/aws"
+	"github.com/the-no/aws-sdk-go/aws/awsutil"
 )
 
 func TestDeepEqual(t *testing.T) {

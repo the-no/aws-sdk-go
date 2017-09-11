@@ -4,9 +4,9 @@
 package cloudsearch
 
 import (
-	"github.com/aws/aws-sdk-go/awstesting/integration/smoke"
-	"github.com/aws/aws-sdk-go/service/cloudsearch"
 	"github.com/gucumber/gucumber"
+	"github.com/the-no/aws-sdk-go/awstesting/integration/smoke"
+	"github.com/the-no/aws-sdk-go/service/cloudsearch"
 )
 
 func init() {

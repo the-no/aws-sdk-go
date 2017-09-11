@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go/private/protocol/json/jsonutil"
 	"github.com/stretchr/testify/assert"
+	"github.com/the-no/aws-sdk-go/private/protocol/json/jsonutil"
 )
 
 func S(s string) *string {

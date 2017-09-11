@@ -12,7 +12,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/aws/aws-sdk-go/private/model/api"
+	"github.com/the-no/aws-sdk-go/private/model/api"
 )
 
 type pkg struct {

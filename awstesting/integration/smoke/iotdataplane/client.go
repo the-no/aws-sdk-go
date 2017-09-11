@@ -6,11 +6,11 @@ package iotdataplane
 import (
 	"fmt"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/awstesting/integration/smoke"
-	"github.com/aws/aws-sdk-go/service/iot"
-	"github.com/aws/aws-sdk-go/service/iotdataplane"
 	"github.com/gucumber/gucumber"
+	"github.com/the-no/aws-sdk-go/aws"
+	"github.com/the-no/aws-sdk-go/awstesting/integration/smoke"
+	"github.com/the-no/aws-sdk-go/service/iot"
+	"github.com/the-no/aws-sdk-go/service/iotdataplane"
 )
 
 func init() {

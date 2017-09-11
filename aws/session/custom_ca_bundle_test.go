@@ -10,10 +10,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/awserr"
-	"github.com/aws/aws-sdk-go/aws/credentials"
-	"github.com/aws/aws-sdk-go/awstesting"
+	"github.com/the-no/aws-sdk-go/aws"
+	"github.com/the-no/aws-sdk-go/aws/awserr"
+	"github.com/the-no/aws-sdk-go/aws/credentials"
+	"github.com/the-no/aws-sdk-go/awstesting"
 )
 
 var TLSBundleCertFile string

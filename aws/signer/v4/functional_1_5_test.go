@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go/aws/signer/v4"
-	"github.com/aws/aws-sdk-go/awstesting/unit"
 	"github.com/stretchr/testify/assert"
+	"github.com/the-no/aws-sdk-go/aws/signer/v4"
+	"github.com/the-no/aws-sdk-go/awstesting/unit"
 )
 
 func TestStandaloneSign(t *testing.T) {

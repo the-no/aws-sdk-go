@@ -11,9 +11,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/aws/aws-sdk-go/aws/request"
-	"github.com/aws/aws-sdk-go/awstesting/mock"
 	"github.com/gucumber/gucumber"
+	"github.com/the-no/aws-sdk-go/aws/request"
+	"github.com/the-no/aws-sdk-go/awstesting/mock"
 )
 
 // mapCreateClients allows for the creation of clients

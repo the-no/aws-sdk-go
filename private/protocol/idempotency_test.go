@@ -4,8 +4,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/aws/aws-sdk-go/private/protocol"
 	"github.com/stretchr/testify/assert"
+	"github.com/the-no/aws-sdk-go/private/protocol"
 )
 
 func TestCanSetIdempotencyToken(t *testing.T) {

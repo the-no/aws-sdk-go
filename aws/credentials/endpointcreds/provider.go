@@ -33,12 +33,12 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/awserr"
-	"github.com/aws/aws-sdk-go/aws/client"
-	"github.com/aws/aws-sdk-go/aws/client/metadata"
-	"github.com/aws/aws-sdk-go/aws/credentials"
-	"github.com/aws/aws-sdk-go/aws/request"
+	"github.com/the-no/aws-sdk-go/aws"
+	"github.com/the-no/aws-sdk-go/aws/awserr"
+	"github.com/the-no/aws-sdk-go/aws/client"
+	"github.com/the-no/aws-sdk-go/aws/client/metadata"
+	"github.com/the-no/aws-sdk-go/aws/credentials"
+	"github.com/the-no/aws-sdk-go/aws/request"
 )
 
 // ProviderName is the name of the credentials provider.

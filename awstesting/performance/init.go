@@ -11,10 +11,10 @@ import (
 	"github.com/gucumber/gucumber"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/awserr"
-	"github.com/aws/aws-sdk-go/awstesting/mock"
-	"github.com/aws/aws-sdk-go/service/s3"
+	"github.com/the-no/aws-sdk-go/aws"
+	"github.com/the-no/aws-sdk-go/aws/awserr"
+	"github.com/the-no/aws-sdk-go/awstesting/mock"
+	"github.com/the-no/aws-sdk-go/service/s3"
 )
 
 func init() {

@@ -5,7 +5,7 @@ package api_test
 import (
 	"testing"
 
-	"github.com/aws/aws-sdk-go/private/model/api"
+	"github.com/the-no/aws-sdk-go/private/model/api"
 )
 
 func TestShapeTagJoin(t *testing.T) {

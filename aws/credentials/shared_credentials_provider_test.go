@@ -5,8 +5,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/aws/aws-sdk-go/internal/shareddefaults"
 	"github.com/stretchr/testify/assert"
+	"github.com/the-no/aws-sdk-go/internal/shareddefaults"
 )
 
 func TestSharedCredentialsProvider(t *testing.T) {

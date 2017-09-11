@@ -4,8 +4,8 @@ import (
 	"encoding/xml"
 	"io/ioutil"
 
-	"github.com/aws/aws-sdk-go/aws/awserr"
-	"github.com/aws/aws-sdk-go/aws/request"
+	"github.com/the-no/aws-sdk-go/aws/awserr"
+	"github.com/the-no/aws-sdk-go/aws/request"
 )
 
 type xmlErrorResponse struct {
