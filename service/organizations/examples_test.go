@@ -7,10 +7,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/awserr"
-	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/organizations"
+	"github.com/the-no/aws-sdk-go/aws"
+	"github.com/the-no/aws-sdk-go/aws/awserr"
+	"github.com/the-no/aws-sdk-go/aws/session"
+	"github.com/the-no/aws-sdk-go/service/organizations"
 )
 
 var _ time.Duration

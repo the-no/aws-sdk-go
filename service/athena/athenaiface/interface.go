@@ -9,9 +9,9 @@
 package athenaiface
 
 import (
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/request"
-	"github.com/aws/aws-sdk-go/service/athena"
+	"github.com/the-no/aws-sdk-go/aws"
+	"github.com/the-no/aws-sdk-go/aws/request"
+	"github.com/the-no/aws-sdk-go/service/athena"
 )
 
 // AthenaAPI provides an interface to enable mocking the

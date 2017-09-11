@@ -1140,7 +1140,7 @@ var renamedPackages = map[string]*packageRenames{
 		shapes:     map[string]string{},
 		fields:     map[string]string{},
 	},
-	"github.com/aws/aws-sdk-go/service/efs": {
+	"github.com/the-no/aws-sdk-go/service/efs": {
 		operations: map[string]string{},
 		shapes:     map[string]string{},
 		fields: map[string]string{

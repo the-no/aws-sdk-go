@@ -9,9 +9,9 @@
 package ecriface
 
 import (
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/request"
-	"github.com/aws/aws-sdk-go/service/ecr"
+	"github.com/the-no/aws-sdk-go/aws"
+	"github.com/the-no/aws-sdk-go/aws/request"
+	"github.com/the-no/aws-sdk-go/service/ecr"
 )
 
 // ECRAPI provides an interface to enable mocking the

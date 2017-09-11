@@ -9,9 +9,9 @@
 package budgetsiface
 
 import (
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/request"
-	"github.com/aws/aws-sdk-go/service/budgets"
+	"github.com/the-no/aws-sdk-go/aws"
+	"github.com/the-no/aws-sdk-go/aws/request"
+	"github.com/the-no/aws-sdk-go/service/budgets"
 )
 
 // BudgetsAPI provides an interface to enable mocking the

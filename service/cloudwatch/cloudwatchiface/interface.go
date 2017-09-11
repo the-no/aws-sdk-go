@@ -9,9 +9,9 @@
 package cloudwatchiface
 
 import (
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/request"
-	"github.com/aws/aws-sdk-go/service/cloudwatch"
+	"github.com/the-no/aws-sdk-go/aws"
+	"github.com/the-no/aws-sdk-go/aws/request"
+	"github.com/the-no/aws-sdk-go/service/cloudwatch"
 )
 
 // CloudWatchAPI provides an interface to enable mocking the

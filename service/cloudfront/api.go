@@ -6,11 +6,11 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/awsutil"
-	"github.com/aws/aws-sdk-go/aws/request"
-	"github.com/aws/aws-sdk-go/private/protocol"
-	"github.com/aws/aws-sdk-go/private/protocol/restxml"
+	"github.com/the-no/aws-sdk-go/aws"
+	"github.com/the-no/aws-sdk-go/aws/awsutil"
+	"github.com/the-no/aws-sdk-go/aws/request"
+	"github.com/the-no/aws-sdk-go/private/protocol"
+	"github.com/the-no/aws-sdk-go/private/protocol/restxml"
 )
 
 const opCreateCloudFrontOriginAccessIdentity = "CreateCloudFrontOriginAccessIdentity2017_03_25"
