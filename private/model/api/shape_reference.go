@@ -13,10 +13,10 @@ type ShapeReferenceType int
 
 const (
 	// ShapeValidationRequired states the shape must be set
-	ShapeReferenceBaseTye = iota
+	ShapeBaseTye = iota
 
-	ShapeReferenceStructure
-	ShapeReferenceList
+	ShapeStructure
+	ShapeList
 )
 
 // A ShapeValidation contains information about a shape and the type of validation
@@ -30,7 +30,7 @@ type ShapeReference struct {
 	Type ShapeReferenceType
 }
 
-var referenceGoCodeTmpls = template.Must(template.New("validationGoCodeTmpls").Parse(`
+var referenceGoCodeTmpls = template.Must(template.New("referenceGoCodeTmpls").Parse(`
 {{ define "baseType" -}}
     	return   s.{{ .Name }}
 {{- end }}
@@ -43,7 +43,7 @@ var referenceGoCodeTmpls = template.Must(template.New("validationGoCodeTmpls").P
 {{- end }}
 {{ define "list" -}}
  	 if len(s.{{ .Name }}) > 0 {
- 	 	s.{{ .Name }}.Reference()
+ 	 	s.{{ .Name }}[0].Reference()
  	 }
 	return   nil
 {{- end }}
@@ -55,11 +55,11 @@ func (sr ShapeReference) GoCode(shape *Shape) string {
 
 	w := &bytes.Buffer{}
 	switch sr.Type {
-	case ShapeReferenceBaseTye:
+	case ShapeBaseTye:
 		err = referenceGoCodeTmpls.ExecuteTemplate(w, "baseType", sr)
-	case ShapeReferenceStructure:
+	case ShapeStructure:
 		err = referenceGoCodeTmpls.ExecuteTemplate(w, "structure", sr)
-	case ShapeReferenceList:
+	case ShapeList:
 		err = referenceGoCodeTmpls.ExecuteTemplate(w, "list", sr)
 	}
 

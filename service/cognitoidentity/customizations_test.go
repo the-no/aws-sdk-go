@@ -3,10 +3,10 @@ package cognitoidentity_test
 import (
 	"testing"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/awstesting/unit"
-	"github.com/aws/aws-sdk-go/service/cognitoidentity"
 	"github.com/stretchr/testify/assert"
+	"github.com/the-no/aws-sdk-go/aws"
+	"github.com/the-no/aws-sdk-go/awstesting/unit"
+	"github.com/the-no/aws-sdk-go/service/cognitoidentity"
 )
 
 var svc = cognitoidentity.New(unit.Session)

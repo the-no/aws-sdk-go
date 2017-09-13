@@ -88,7 +88,8 @@ type Shape struct {
 	Validations ShapeValidations
 
 	ReferenceAction *ShapeReference
-
+	ShapeAttrabutes ShapeAttrabutes
+	AttrabuteRef    *ShapeAttrabute
 	// Error information that is set if the shape is an error shape.
 	IsError   bool
 	ErrorInfo ErrorInfo `json:"error"`
@@ -566,8 +567,19 @@ type {{ .ShapeName }} struct {
 
 {{ if not .API.NoValidataShapeMethods }}
 	{{ if .ReferenceAction -}}
-	func (s *{{ .ShapeName }}) Reference() interface{} {
+	func (s {{ .ShapeName }}) Reference() interface{} {
 		{{ .ReferenceAction.GoCode . }}
+	}
+	{{ end }}
+{{ end }}
+
+{{ if not .API.NoAttrabuteMethods }}
+	{{ if .ShapeAttrabutes -}}
+		{{ .ShapeAttrabutes.GoCode . }}
+	{{ end }}
+	{{ if .AttrabuteRef -}}
+	func (s {{ .ShapeName }}) Attrabute(attr string) interface{} {
+		{{ .AttrabuteRef.GoCode }}
 	}
 	{{ end }}
 {{ end }}

@@ -73,10 +73,10 @@ func (a *API) Setup() {
 	if !a.NoReferenceMethods {
 		a.addReferences()
 	}
-	/*
-		if !a.NoAttrabuteMethods {
-			a.addAttrabutes()
-		}
-	*/
+
+	if !a.NoAttrabuteMethods {
+		a.addAttrabutes()
+	}
+
 	a.initialized = true
 }

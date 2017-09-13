@@ -3,8 +3,8 @@ package rdsutils_test
 import (
 	"testing"
 
-	"github.com/aws/aws-sdk-go/aws/credentials"
-	"github.com/aws/aws-sdk-go/service/rds/rdsutils"
+	"github.com/the-no/aws-sdk-go/aws/credentials"
+	"github.com/the-no/aws-sdk-go/service/rds/rdsutils"
 
 	"github.com/stretchr/testify/assert"
 )

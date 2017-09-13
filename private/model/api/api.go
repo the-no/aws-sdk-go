@@ -667,14 +667,14 @@ func resolveShapeReference(s *Shape) {
 
 		switch ref.Shape.Type {
 		case "list":
-			s.ReferenceAction.Type = ShapeReferenceList
+			s.ReferenceAction.Type = ShapeList
 		case "structure":
-			s.ReferenceAction.Type = ShapeReferenceStructure
+			s.ReferenceAction.Type = ShapeStructure
 		default:
-			s.ReferenceAction.Type = ShapeReferenceBaseTye
+			s.ReferenceAction.Type = ShapeBaseTye
 		}
 
-		if s.ReferenceAction.Type == ShapeReferenceList || s.ReferenceAction.Type == ShapeReferenceStructure {
+		if s.ReferenceAction.Type == ShapeList || s.ReferenceAction.Type == ShapeStructure {
 			nestedShape := ref.Shape.NestedShape()
 			resolveShapeReference(nestedShape)
 		}
@@ -689,65 +689,52 @@ func (a *API) addAttrabutes() {
 	}
 }
 
-func resolveShapeAttrabutes(s *Shape, ancestry ...*Shape) {
-	/*for _, a := range ancestry {
-		if a == s {
-			return
-		}
-	}
+func resolveShapeAttrabutes(s *Shape) {
 
 	children := []string{}
 	for _, name := range s.MemberNames() {
 		ref := s.MemberRefs[name]
+		if s.IsAttrabute(name) {
+			attr := ShapeAttrabute{
+				Name: name, Ref: ref,
+			}
+			switch ref.Shape.Type {
+			case "list":
+				attr.Type = ShapeList
+				children = append(children, name)
+			case "structure":
+				attr.Type = ShapeStructure
+				children = append(children, name)
+			default:
+				attr.Type = ShapeBaseTye
+			}
 
-		if s.IsRequired(name) && !s.Validations.Has(ref, ShapeValidationRequired) {
-			s.Validations = append(s.Validations, ShapeValidation{
-				Name: name, Ref: ref, Type: ShapeValidationRequired,
-			})
-		}
+			if attr.Type != ShapeBaseTye {
+				s.AttrabuteRef = &attr
+				s.ShapeAttrabutes = nil
+				break
+			} else {
+				if !s.ShapeAttrabutes.Has(ref) {
+					s.ShapeAttrabutes = append(s.ShapeAttrabutes, attr)
+				}
+			}
 
-		if ref.Shape.Min != 0 && !s.Validations.Has(ref, ShapeValidationMinVal) {
-			s.Validations = append(s.Validations, ShapeValidation{
-				Name: name, Ref: ref, Type: ShapeValidationMinVal,
-			})
-		}
-
-		switch ref.Shape.Type {
-		case "map", "list", "structure":
-			children = append(children, name)
 		}
 	}
 
-	ancestry = append(ancestry, s)
+	//	ancestry = append(ancestry, s)
 	for _, name := range children {
 		ref := s.MemberRefs[name]
-		// Since this is a grab bag we will just continue since
-		// we can't validate because we don't know the valued shape.
 		if ref.JSONValue {
 			continue
 		}
 
 		nestedShape := ref.Shape.NestedShape()
-
-		var v *ShapeValidation
-		if len(nestedShape.Validations) > 0 {
-			v = &ShapeValidation{
-				Name: name, Ref: ref, Type: ShapeValidationNested,
-			}
-		} else {
-			resolveShapeValidations(nestedShape, ancestry...)
-			if len(nestedShape.Validations) > 0 {
-				v = &ShapeValidation{
-					Name: name, Ref: ref, Type: ShapeValidationNested,
-				}
-			}
-		}
-
-		if v != nil && !s.Validations.Has(v.Ref, v.Type) {
-			s.Validations = append(s.Validations, *v)
+		if len(nestedShape.Attrabute) > 0 && len(nestedShape.ShapeAttrabutes) < 1 {
+			resolveShapeAttrabutes(nestedShape)
 		}
 	}
-	ancestry = ancestry[:len(ancestry)-1]*/
+	//	ancestry = ancestry[:len(ancestry)-1]
 }
 
 // computes the validation chain for all input shapes
