@@ -93,3 +93,10 @@ func (c *Rekognition) newRequest(op *request.Operation, params, data interface{}
 
 	return req
 }
+
+func (c *Rekognition) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
+	switch typ {
+
+	}
+	return nil.nil.nil, errors.New("Invail Resource Type!")
+}

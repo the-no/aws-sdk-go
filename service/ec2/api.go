@@ -42827,7 +42827,7 @@ func (s Instance) GoString() string {
 	return s.String()
 }
 
-func (s Instance) Reference() interface{} {
+func (s Instance) Reference() string {
 	return s.InstanceId
 }
 
@@ -50550,11 +50550,11 @@ func (s Reservation) GoString() string {
 	return s.String()
 }
 
-func (s Reservation) Reference() interface{} {
+func (s Reservation) Reference() string {
 	if len(s.Instances) > 0 {
 		s.Instances[0].Reference()
 	}
-	return nil
+	return ""
 }
 
 func (s Reservation) Attrabute(attr string) interface{} {

@@ -38,14 +38,14 @@ var referenceGoCodeTmpls = template.Must(template.New("referenceGoCodeTmpls").Pa
 	if  s.{{ .Name }} != nil{
 		 s.{{ .Name }}.Reference()
 	}
-	return   nil
+	return   ""
 }
 {{- end }}
 {{ define "list" -}}
  	 if len(s.{{ .Name }}) > 0 {
  	 	s.{{ .Name }}[0].Reference()
  	 }
-	return   nil
+	return   ""
 {{- end }}
 `))
 

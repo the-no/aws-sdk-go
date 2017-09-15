@@ -116,3 +116,8 @@ func (b *WriteAtBuffer) Bytes() []byte {
 	defer b.m.Unlock()
 	return b.buf
 }
+
+type Referencer interface {
+	Reference() interface{}
+	Attrabute(attr string) interface{}
+}

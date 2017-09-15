@@ -25,6 +25,7 @@ type Operation struct {
 	Deprecated    bool   `json:"deprecated"`
 	AuthType      string `json:"authtype"`
 	imports       map[string]bool
+	Resource      string
 }
 
 // A HTTPInfo defines the method of HTTP request for the Operation.

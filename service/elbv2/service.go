@@ -91,3 +91,10 @@ func (c *ELBV2) newRequest(op *request.Operation, params, data interface{}) *req
 
 	return req
 }
+
+func (c *ELBV2) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
+	switch typ {
+
+	}
+	return nil.nil.nil, errors.New("Invail Resource Type!")
+}

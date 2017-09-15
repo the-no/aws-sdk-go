@@ -96,3 +96,10 @@ func (c *CloudHSMV2) newRequest(op *request.Operation, params, data interface{})
 
 	return req
 }
+
+func (c *CloudHSMV2) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
+	switch typ {
+
+	}
+	return nil.nil.nil, errors.New("Invail Resource Type!")
+}

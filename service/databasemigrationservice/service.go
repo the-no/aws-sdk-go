@@ -93,3 +93,10 @@ func (c *DatabaseMigrationService) newRequest(op *request.Operation, params, dat
 
 	return req
 }
+
+func (c *DatabaseMigrationService) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
+	switch typ {
+
+	}
+	return nil.nil.nil, errors.New("Invail Resource Type!")
+}

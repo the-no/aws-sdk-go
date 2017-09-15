@@ -494,6 +494,35 @@ func (c *{{ .StructName }}) newRequest(op *request.Operation, params, data inter
 
 	return req
 }
+
+func (c *{{ .StructName }}) CreateResource(typ string , data []byte) (intput ,output interface{} ,ref Referencer, err error) {
+	switch typ {
+	{{ range $_, $v := .OperationList -}}
+	 	{{ if ne $v.Resource "" -}}
+			case "{{$v.Resource}}":
+				in := &{{$v.InputRef.GoType}}{}
+				if err := json.Unmarshal(data, in); err != nil {
+        		 return nil,nil.nil,err
+    			}
+    			if out ,err := c.{{ $v.ExportedName }}(in); err != nil{
+ 					return in,nil.nil,err
+    			}else{
+    				{{if  $v.InputRef.Shape.ReferenceAction}}
+    					return in,out,in,nil
+    				{{ else }}
+    					{{if  $v.OutputRef.Shape.ReferenceAction}}
+    						return in,out,out,nil
+    					{{ else }}
+    						return in,out,nil,nil
+    					{{ end }}
+    				{{ end }}		
+    			}				
+		{{ end }}
+	{{ end }}
+
+	}
+	return nil.nil.nil,errors.New("Invail Resource Type!")
+}
 `))
 
 // ServicePackageDoc generates the contents of the doc file for the service.

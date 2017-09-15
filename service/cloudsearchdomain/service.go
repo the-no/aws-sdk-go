@@ -100,3 +100,10 @@ func (c *CloudSearchDomain) newRequest(op *request.Operation, params, data inter
 
 	return req
 }
+
+func (c *CloudSearchDomain) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
+	switch typ {
+
+	}
+	return nil.nil.nil, errors.New("Invail Resource Type!")
+}

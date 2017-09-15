@@ -93,3 +93,10 @@ func (c *StorageGateway) newRequest(op *request.Operation, params, data interfac
 
 	return req
 }
+
+func (c *StorageGateway) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
+	switch typ {
+
+	}
+	return nil.nil.nil, errors.New("Invail Resource Type!")
+}

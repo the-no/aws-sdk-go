@@ -95,3 +95,10 @@ func (c *LexModelBuildingService) newRequest(op *request.Operation, params, data
 
 	return req
 }
+
+func (c *LexModelBuildingService) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
+	switch typ {
+
+	}
+	return nil.nil.nil, errors.New("Invail Resource Type!")
+}

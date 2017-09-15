@@ -104,6 +104,13 @@ func (c *OutputService1ProtocolTest) newRequest(op *request.Operation, params, d
 	return req
 }
 
+func (c *OutputService1ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
+	switch typ {
+
+	}
+	return nil.nil.nil, errors.New("Invail Resource Type!")
+}
+
 const opOutputService1TestCaseOperation1 = "OperationName"
 
 // OutputService1TestCaseOperation1Request generates a "aws/request.Request" representing the
@@ -303,6 +310,13 @@ func (c *OutputService2ProtocolTest) newRequest(op *request.Operation, params, d
 	return req
 }
 
+func (c *OutputService2ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
+	switch typ {
+
+	}
+	return nil.nil.nil, errors.New("Invail Resource Type!")
+}
+
 const opOutputService2TestCaseOperation1 = "OperationName"
 
 // OutputService2TestCaseOperation1Request generates a "aws/request.Request" representing the
@@ -468,6 +482,13 @@ func (c *OutputService3ProtocolTest) newRequest(op *request.Operation, params, d
 	return req
 }
 
+func (c *OutputService3ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
+	switch typ {
+
+	}
+	return nil.nil.nil, errors.New("Invail Resource Type!")
+}
+
 const opOutputService3TestCaseOperation1 = "OperationName"
 
 // OutputService3TestCaseOperation1Request generates a "aws/request.Request" representing the
@@ -629,6 +650,13 @@ func (c *OutputService4ProtocolTest) newRequest(op *request.Operation, params, d
 	req := c.NewRequest(op, params, data)
 
 	return req
+}
+
+func (c *OutputService4ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
+	switch typ {
+
+	}
+	return nil.nil.nil, errors.New("Invail Resource Type!")
 }
 
 const opOutputService4TestCaseOperation1 = "OperationName"
@@ -866,6 +894,13 @@ func (c *OutputService5ProtocolTest) newRequest(op *request.Operation, params, d
 	return req
 }
 
+func (c *OutputService5ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
+	switch typ {
+
+	}
+	return nil.nil.nil, errors.New("Invail Resource Type!")
+}
+
 const opOutputService5TestCaseOperation1 = "OperationName"
 
 // OutputService5TestCaseOperation1Request generates a "aws/request.Request" representing the
@@ -1007,6 +1042,13 @@ func (c *OutputService6ProtocolTest) newRequest(op *request.Operation, params, d
 	req := c.NewRequest(op, params, data)
 
 	return req
+}
+
+func (c *OutputService6ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
+	switch typ {
+
+	}
+	return nil.nil.nil, errors.New("Invail Resource Type!")
 }
 
 const opOutputService6TestCaseOperation1 = "OperationName"

@@ -93,3 +93,10 @@ func (c *CloudWatchEvents) newRequest(op *request.Operation, params, data interf
 
 	return req
 }
+
+func (c *CloudWatchEvents) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
+	switch typ {
+
+	}
+	return nil.nil.nil, errors.New("Invail Resource Type!")
+}

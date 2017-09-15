@@ -91,3 +91,10 @@ func (c *Route53) newRequest(op *request.Operation, params, data interface{}) *r
 
 	return req
 }
+
+func (c *Route53) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
+	switch typ {
+
+	}
+	return nil.nil.nil, errors.New("Invail Resource Type!")
+}

@@ -96,3 +96,10 @@ func (c *MarketplaceMetering) newRequest(op *request.Operation, params, data int
 
 	return req
 }
+
+func (c *MarketplaceMetering) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
+	switch typ {
+
+	}
+	return nil.nil.nil, errors.New("Invail Resource Type!")
+}

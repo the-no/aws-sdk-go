@@ -153,6 +153,7 @@ vet:
 get-deps: get-deps-tests get-deps-verify
 	@echo "go get SDK dependencies"
 	@go get -v $(SDK_ONLY_PKGS)
+	
 
 get-deps-tests:
 	@echo "go get SDK testing dependencies"
