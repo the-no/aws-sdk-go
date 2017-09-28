@@ -567,7 +567,7 @@ type {{ .ShapeName }} struct {
 
 {{ if not .API.NoValidataShapeMethods }}
 	{{ if .ReferenceAction -}}
-	func (s {{ .ShapeName }}) Reference() string {
+	func (s {{ .ShapeName }}) Reference() interface{} {
 		{{ .ReferenceAction.GoCode . }}
 	}
 	{{ end }}

@@ -60,14 +60,13 @@ func (a *API) WaitersGoCode() string {
 // used for unmarshaling from the waiter JSON file
 type waiterDefinitions struct {
 	*API
-	Waiters map[string]Waiter
+	Waiters map[string]*Waiter
 }
 
 // AttachWaiters reads a file of waiter definitions, and adds those to the API.
 // Will panic if an error occurs.
 func (a *API) AttachWaiters(filename string) {
 	p := waiterDefinitions{API: a}
-
 	f, err := os.Open(filename)
 	defer f.Close()
 	if err != nil {
@@ -82,7 +81,8 @@ func (a *API) AttachWaiters(filename string) {
 }
 
 func (p *waiterDefinitions) setup() {
-	p.API.Waiters = []Waiter{}
+	p.API.Waiters = []*Waiter{}
+	p.API.waitersMap = p.Waiters
 	i, keys := 0, make([]string, len(p.Waiters))
 	for k := range p.Waiters {
 		keys[i] = k

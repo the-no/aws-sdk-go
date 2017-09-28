@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "creators": {
+    "AWS::EC2::Instance": {
+      "input":"RunInstancesRequest",
+      "operation": "RunInstances",
+      "referencer":"",
+      "attrabuter":"",
+      "operations": {
+        "RunInstances":{
+          "next":"StartInstances",
+          "waiter" : {
+            "name" :"InstanceRunning",
+            "arguments":[ 
+                {
+                  "key":"InstanceIds",
+                  "Input":"RunInstances.output",
+                  "value":"Instances[].InstanceId"
+                }
+            ] 
+          }
+        },
+        "StartInstances":{
+          "next":"",
+          "arguments":[ 
+              {
+                "key":"InstanceIds",
+                "Input":"RunInstances.output",
+                "value":"Instances[].InstanceId"
+              }
+          ],
+          "waiter" : {
+            "name" :"InstanceRunning",
+            "arguments":[ 
+                {
+                  "key":"InstanceIds",
+                  "Input":"RunInstances.output",
+                  "value":"Instances[].InstanceId"
+                }
+            ] 
+          }
+        }
+      }
+    }
+  }
+}

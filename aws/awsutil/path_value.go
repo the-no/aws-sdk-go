@@ -220,3 +220,13 @@ func setValue(dstVal reflect.Value, src interface{}) {
 	}
 
 }
+
+func CopyValue(fromV interface{}, frompath string, toV interface{}, topath string) error {
+	result, err := jmespath.Search(frompath, fromV)
+	if err != nil {
+		return err
+	}
+
+	SetValueAtPath(toV, topath, result)
+	return nil
+}

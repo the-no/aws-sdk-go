@@ -3,6 +3,8 @@
 package clouddirectory
 
 import (
+	"errors"
+
 	"github.com/the-no/aws-sdk-go/aws"
 	"github.com/the-no/aws-sdk-go/aws/client"
 	"github.com/the-no/aws-sdk-go/aws/client/metadata"
@@ -95,9 +97,6 @@ func (c *CloudDirectory) newRequest(op *request.Operation, params, data interfac
 	return req
 }
 
-func (c *CloudDirectory) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
-	switch typ {
-
-	}
-	return nil.nil.nil, errors.New("Invail Resource Type!")
+func (c *CloudDirectory) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
+	return nil, nil, nil, errors.New("Invail Resource Type!")
 }

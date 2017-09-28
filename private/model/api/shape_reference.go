@@ -32,7 +32,10 @@ type ShapeReference struct {
 
 var referenceGoCodeTmpls = template.Must(template.New("referenceGoCodeTmpls").Parse(`
 {{ define "baseType" -}}
-    	return   s.{{ .Name }}
+   // if s.{{ .Name -}} != nil {
+    return *s.{{ .Name }}
+   // }
+   // return ""
 {{- end }}
 {{ define "structure" -}}
 	if  s.{{ .Name }} != nil{

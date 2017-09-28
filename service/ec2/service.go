@@ -3,6 +3,9 @@
 package ec2
 
 import (
+	"encoding/json"
+	"errors"
+
 	"github.com/the-no/aws-sdk-go/aws"
 	"github.com/the-no/aws-sdk-go/aws/client"
 	"github.com/the-no/aws-sdk-go/aws/client/metadata"
@@ -92,20 +95,23 @@ func (c *EC2) newRequest(op *request.Operation, params, data interface{}) *reque
 	return req
 }
 
-func (c *EC2) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
+func (c *EC2) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
+
 	switch typ {
 
 	case "AWS::EC2::Instance":
-		in := &*RunInstancesInput{}
-		if err := json.Unmarshal(data, input); err != nil {
-			return nil, nil.nil, err
+		in := &RunInstancesInput{}
+		if err := json.Unmarshal(data, in); err != nil {
+			return nil, nil, nil, err
 		}
 		if out, err := c.RunInstances(in); err != nil {
-			return in, nil.nil, err
+			return in, nil, nil, err
 		} else {
-			return in, out, out, nil
-		}
-	}
 
-	return nil.nil.nil, errors.New("Invail Resource Type!")
+			return in, out, out, nil
+
+		}
+
+	}
+	return nil, nil, nil, errors.New("Invail Resource Type!")
 }

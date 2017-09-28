@@ -3,6 +3,8 @@
 package lambda
 
 import (
+	"errors"
+
 	"github.com/the-no/aws-sdk-go/aws"
 	"github.com/the-no/aws-sdk-go/aws/client"
 	"github.com/the-no/aws-sdk-go/aws/client/metadata"
@@ -92,9 +94,6 @@ func (c *Lambda) newRequest(op *request.Operation, params, data interface{}) *re
 	return req
 }
 
-func (c *Lambda) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
-	switch typ {
-
-	}
-	return nil.nil.nil, errors.New("Invail Resource Type!")
+func (c *Lambda) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
+	return nil, nil, nil, errors.New("Invail Resource Type!")
 }

@@ -13,18 +13,20 @@ import (
 	"testing"
 	"time"
 
+	"errors"
 	"github.com/stretchr/testify/assert"
+	"github.com/the-no/aws-sdk-go/awstesting"
+	"github.com/the-no/aws-sdk-go/awstesting/unit"
+	"github.com/the-no/aws-sdk-go/private/protocol"
+	"github.com/the-no/aws-sdk-go/private/protocol/xml/xmlutil"
+	"github.com/the-no/aws-sdk-go/private/util"
+
 	"github.com/the-no/aws-sdk-go/aws"
 	"github.com/the-no/aws-sdk-go/aws/client"
 	"github.com/the-no/aws-sdk-go/aws/client/metadata"
 	"github.com/the-no/aws-sdk-go/aws/request"
 	"github.com/the-no/aws-sdk-go/aws/signer/v4"
-	"github.com/the-no/aws-sdk-go/awstesting"
-	"github.com/the-no/aws-sdk-go/awstesting/unit"
-	"github.com/the-no/aws-sdk-go/private/protocol"
 	"github.com/the-no/aws-sdk-go/private/protocol/query"
-	"github.com/the-no/aws-sdk-go/private/protocol/xml/xmlutil"
-	"github.com/the-no/aws-sdk-go/private/util"
 )
 
 var _ bytes.Buffer // always import bytes
@@ -104,11 +106,8 @@ func (c *InputService1ProtocolTest) newRequest(op *request.Operation, params, da
 	return req
 }
 
-func (c *InputService1ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
-	switch typ {
-
-	}
-	return nil.nil.nil, errors.New("Invail Resource Type!")
+func (c *InputService1ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
+	return nil, nil, nil, errors.New("Invail Resource Type!")
 }
 
 const opInputService1TestCaseOperation1 = "OperationName"
@@ -420,11 +419,8 @@ func (c *InputService2ProtocolTest) newRequest(op *request.Operation, params, da
 	return req
 }
 
-func (c *InputService2ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
-	switch typ {
-
-	}
-	return nil.nil.nil, errors.New("Invail Resource Type!")
+func (c *InputService2ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
+	return nil, nil, nil, errors.New("Invail Resource Type!")
 }
 
 const opInputService2TestCaseOperation1 = "OperationName"
@@ -584,11 +580,8 @@ func (c *InputService3ProtocolTest) newRequest(op *request.Operation, params, da
 	return req
 }
 
-func (c *InputService3ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
-	switch typ {
-
-	}
-	return nil.nil.nil, errors.New("Invail Resource Type!")
+func (c *InputService3ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
+	return nil, nil, nil, errors.New("Invail Resource Type!")
 }
 
 const opInputService3TestCaseOperation1 = "OperationName"
@@ -810,11 +803,8 @@ func (c *InputService4ProtocolTest) newRequest(op *request.Operation, params, da
 	return req
 }
 
-func (c *InputService4ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
-	switch typ {
-
-	}
-	return nil.nil.nil, errors.New("Invail Resource Type!")
+func (c *InputService4ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
+	return nil, nil, nil, errors.New("Invail Resource Type!")
 }
 
 const opInputService4TestCaseOperation1 = "OperationName"
@@ -1052,11 +1042,8 @@ func (c *InputService5ProtocolTest) newRequest(op *request.Operation, params, da
 	return req
 }
 
-func (c *InputService5ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
-	switch typ {
-
-	}
-	return nil.nil.nil, errors.New("Invail Resource Type!")
+func (c *InputService5ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
+	return nil, nil, nil, errors.New("Invail Resource Type!")
 }
 
 const opInputService5TestCaseOperation1 = "OperationName"
@@ -1204,11 +1191,8 @@ func (c *InputService6ProtocolTest) newRequest(op *request.Operation, params, da
 	return req
 }
 
-func (c *InputService6ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
-	switch typ {
-
-	}
-	return nil.nil.nil, errors.New("Invail Resource Type!")
+func (c *InputService6ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
+	return nil, nil, nil, errors.New("Invail Resource Type!")
 }
 
 const opInputService6TestCaseOperation1 = "OperationName"
@@ -1356,11 +1340,8 @@ func (c *InputService7ProtocolTest) newRequest(op *request.Operation, params, da
 	return req
 }
 
-func (c *InputService7ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
-	switch typ {
-
-	}
-	return nil.nil.nil, errors.New("Invail Resource Type!")
+func (c *InputService7ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
+	return nil, nil, nil, errors.New("Invail Resource Type!")
 }
 
 const opInputService7TestCaseOperation1 = "OperationName"
@@ -1516,11 +1497,8 @@ func (c *InputService8ProtocolTest) newRequest(op *request.Operation, params, da
 	return req
 }
 
-func (c *InputService8ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
-	switch typ {
-
-	}
-	return nil.nil.nil, errors.New("Invail Resource Type!")
+func (c *InputService8ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
+	return nil, nil, nil, errors.New("Invail Resource Type!")
 }
 
 const opInputService8TestCaseOperation1 = "OperationName"
@@ -1668,11 +1646,8 @@ func (c *InputService9ProtocolTest) newRequest(op *request.Operation, params, da
 	return req
 }
 
-func (c *InputService9ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
-	switch typ {
-
-	}
-	return nil.nil.nil, errors.New("Invail Resource Type!")
+func (c *InputService9ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
+	return nil, nil, nil, errors.New("Invail Resource Type!")
 }
 
 const opInputService9TestCaseOperation1 = "OperationName"
@@ -1820,11 +1795,8 @@ func (c *InputService10ProtocolTest) newRequest(op *request.Operation, params, d
 	return req
 }
 
-func (c *InputService10ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
-	switch typ {
-
-	}
-	return nil.nil.nil, errors.New("Invail Resource Type!")
+func (c *InputService10ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
+	return nil, nil, nil, errors.New("Invail Resource Type!")
 }
 
 const opInputService10TestCaseOperation1 = "OperationName"
@@ -1973,11 +1945,8 @@ func (c *InputService11ProtocolTest) newRequest(op *request.Operation, params, d
 	return req
 }
 
-func (c *InputService11ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
-	switch typ {
-
-	}
-	return nil.nil.nil, errors.New("Invail Resource Type!")
+func (c *InputService11ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
+	return nil, nil, nil, errors.New("Invail Resource Type!")
 }
 
 const opInputService11TestCaseOperation1 = "OperationName"
@@ -2125,11 +2094,8 @@ func (c *InputService12ProtocolTest) newRequest(op *request.Operation, params, d
 	return req
 }
 
-func (c *InputService12ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
-	switch typ {
-
-	}
-	return nil.nil.nil, errors.New("Invail Resource Type!")
+func (c *InputService12ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
+	return nil, nil, nil, errors.New("Invail Resource Type!")
 }
 
 const opInputService12TestCaseOperation1 = "OperationName"
@@ -2683,11 +2649,8 @@ func (c *InputService13ProtocolTest) newRequest(op *request.Operation, params, d
 	return req
 }
 
-func (c *InputService13ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref Referencer, err error) {
-	switch typ {
-
-	}
-	return nil.nil.nil, errors.New("Invail Resource Type!")
+func (c *InputService13ProtocolTest) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
+	return nil, nil, nil, errors.New("Invail Resource Type!")
 }
 
 const opInputService13TestCaseOperation1 = "OperationName"

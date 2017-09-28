@@ -29,6 +29,10 @@ func (a *API) updateTopLevelShapeReferences() {
 		if o.InputRef.XMLNamespace.URI != "" {
 			o.InputRef.Shape.XMLNamespace.URI = o.InputRef.XMLNamespace.URI
 		}
+
+		if len(o.Resource) > 0 {
+			a.IsCreator = true
+		}
 	}
 
 }

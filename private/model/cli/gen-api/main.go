@@ -62,6 +62,13 @@ func newGenerateInfo(modelFile, svcPath, svcImportPath string) *generateInfo {
 		fmt.Println("waiters-2.json error:", err)
 	}
 
+	formationFile := strings.Replace(modelFile, "api-2.json", "formation-2.json", -1)
+	if _, err := os.Stat(formationFile); err == nil {
+		g.API.AttachFormationCreators(formationFile)
+	} else if !os.IsNotExist(err) {
+		fmt.Println("formation-2.json error:", err)
+	}
+
 	examplesFile := strings.Replace(modelFile, "api-2.json", "examples-1.json", -1)
 	if _, err := os.Stat(examplesFile); err == nil {
 		g.API.AttachExamples(examplesFile)
@@ -195,6 +202,7 @@ func writeServiceFiles(g *generateInfo, filename string) {
 	Must(writeServiceFile(g))
 	Must(writeInterfaceFile(g))
 	Must(writeWaitersFile(g))
+	Must(writeFormationsFile(g))
 	Must(writeAPIErrorsFile(g))
 	Must(writeExamplesFile(g))
 }
@@ -279,6 +287,19 @@ func writeWaitersFile(g *generateInfo) error {
 		"",
 		g.API.PackageName(),
 		g.API.WaitersGoCode(),
+	)
+}
+
+func writeFormationsFile(g *generateInfo) error {
+	if len(g.API.Creators) == 0 {
+		return nil
+	}
+
+	return writeGoFile(filepath.Join(g.PackageDir, "formation.go"),
+		codeLayout,
+		"",
+		g.API.PackageName(),
+		g.API.FormationCreatorGoCode(),
 	)
 }
 

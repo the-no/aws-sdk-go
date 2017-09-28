@@ -12,7 +12,7 @@ type ShapeAttrabute ShapeReference
 
 var attrabuteGoCodeTmpls = template.Must(template.New("attrabuteGoCodeTmpls").Parse(`
 {{ define "baseType" -}}
-    	return  s.{{ .Name }}
+    return s.{{ .Name }}
 {{- end }}
 {{ define "structure" -}}
 	if  s.{{ .Name }} != nil{
@@ -61,6 +61,7 @@ func (s {{ .Shape.ShapeName }}) Attrabute(attr string) interface{} {
 			{{ $v.GoCode }}
 	{{ end }}
 	}
+	return nil
 }
 `))
 

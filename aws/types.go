@@ -119,5 +119,8 @@ func (b *WriteAtBuffer) Bytes() []byte {
 
 type Referencer interface {
 	Reference() interface{}
+}
+
+type Attrabuter interface {
 	Attrabute(attr string) interface{}
 }

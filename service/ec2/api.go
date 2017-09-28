@@ -42827,8 +42827,11 @@ func (s Instance) GoString() string {
 	return s.String()
 }
 
-func (s Instance) Reference() string {
-	return s.InstanceId
+func (s Instance) Reference() interface{} {
+	// if s.InstanceId!= nil {
+	return *s.InstanceId
+	// }
+	// return ""
 }
 
 // Validate inspects the fields of the type to determine if they are valid.
@@ -42838,6 +42841,7 @@ func (s Instance) Attrabute(attr string) interface{} {
 		return s.PublicDnsName
 
 	}
+	return nil
 }
 
 // SetAmiLaunchIndex sets the AmiLaunchIndex field's value.
@@ -50550,7 +50554,7 @@ func (s Reservation) GoString() string {
 	return s.String()
 }
 
-func (s Reservation) Reference() string {
+func (s Reservation) Reference() interface{} {
 	if len(s.Instances) > 0 {
 		s.Instances[0].Reference()
 	}

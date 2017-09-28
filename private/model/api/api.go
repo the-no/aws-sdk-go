@@ -21,7 +21,8 @@ type API struct {
 	Metadata      Metadata
 	Operations    map[string]*Operation
 	Shapes        map[string]*Shape
-	Waiters       []Waiter
+	Creators      map[string]*FormationCreator
+	Waiters       []*Waiter
 	Documentation string
 	Examples      Examples
 
@@ -51,12 +52,14 @@ type API struct {
 
 	SvcClientImportPath string
 
-	initialized bool
-	imports     map[string]bool
-	name        string
-	path        string
-
+	initialized      bool
+	imports          map[string]bool
+	name             string
+	path             string
+	waitersMap       map[string]*Waiter
 	BaseCrosslinkURL string
+
+	IsCreator bool
 }
 
 // A Metadata is the metadata about an API's definition.
@@ -495,22 +498,24 @@ func (c *{{ .StructName }}) newRequest(op *request.Operation, params, data inter
 	return req
 }
 
-func (c *{{ .StructName }}) CreateResource(typ string , data []byte) (intput ,output interface{} ,ref Referencer, err error) {
+
+func (c *{{ .StructName }}) CreateResource(typ string , data []byte) (intput ,output interface{} ,ref aws.Referencer, err error) {
+{{ if .IsCreator }}
 	switch typ {
 	{{ range $_, $v := .OperationList -}}
 	 	{{ if ne $v.Resource "" -}}
 			case "{{$v.Resource}}":
-				in := &{{$v.InputRef.GoType}}{}
+				in := &{{ $v.InputRef.ShapeName -}}{}
 				if err := json.Unmarshal(data, in); err != nil {
-        		 return nil,nil.nil,err
+        		 return nil,nil,nil,err
     			}
-    			if out ,err := c.{{ $v.ExportedName }}(in); err != nil{
- 					return in,nil.nil,err
+    			if out ,err := c.{{ $v.ExportedName -}}(in); err != nil{
+ 					return in,nil,nil,err
     			}else{
-    				{{if  $v.InputRef.Shape.ReferenceAction}}
+    				{{if $v.InputRef.Shape.ReferenceAction -}}
     					return in,out,in,nil
     				{{ else }}
-    					{{if  $v.OutputRef.Shape.ReferenceAction}}
+    					{{if  $v.OutputRef.Shape.ReferenceAction -}}
     						return in,out,out,nil
     					{{ else }}
     						return in,out,nil,nil
@@ -519,9 +524,9 @@ func (c *{{ .StructName }}) CreateResource(typ string , data []byte) (intput ,ou
     			}				
 		{{ end }}
 	{{ end }}
-
 	}
-	return nil.nil.nil,errors.New("Invail Resource Type!")
+{{ end -}}
+	return nil,nil,nil,errors.New("Invail Resource Type!")
 }
 `))
 
@@ -542,6 +547,7 @@ func (a *API) ServicePackageDoc() string {
 // ServiceGoCode renders service go code. Returning it as a string.
 func (a *API) ServiceGoCode() string {
 	a.resetImports()
+	a.imports["errors"] = true
 	a.imports["github.com/the-no/aws-sdk-go/aws/client"] = true
 	a.imports["github.com/the-no/aws-sdk-go/aws/client/metadata"] = true
 	a.imports["github.com/the-no/aws-sdk-go/aws/request"] = true
@@ -550,6 +556,9 @@ func (a *API) ServiceGoCode() string {
 		a.imports["github.com/the-no/aws-sdk-go/aws/corehandlers"] = true
 	} else {
 		a.imports["github.com/the-no/aws-sdk-go/aws/signer/v4"] = true
+	}
+	if a.IsCreator {
+		a.imports["encoding/json"] = true
 	}
 	a.imports["github.com/the-no/aws-sdk-go/private/protocol/"+a.ProtocolPackage()] = true
 
