@@ -2,7 +2,6 @@
   "version": 2,
   "creators": {
     "AWS::EC2::Instance": {
-      "input":"RunInstancesRequest",
       "operation": "RunInstances",
       "referencer":"",
       "attrabuter":"",
@@ -14,7 +13,7 @@
             "arguments":[ 
                 {
                   "key":"InstanceIds",
-                  "Input":"RunInstances.output",
+                  "Input":"RunInstances.Output",
                   "value":"Instances[].InstanceId"
                 }
             ] 
@@ -25,7 +24,7 @@
           "arguments":[ 
               {
                 "key":"InstanceIds",
-                "Input":"RunInstances.output",
+                "Input":"RunInstances.Output",
                 "value":"Instances[].InstanceId"
               }
           ],
@@ -34,8 +33,29 @@
             "arguments":[ 
                 {
                   "key":"InstanceIds",
-                  "Input":"RunInstances.output",
+                  "Input":"RunInstances.Output",
                   "value":"Instances[].InstanceId"
+                }
+            ] 
+          }
+        }
+      }
+    }
+  },
+  "deleters": {
+    "AWS::EC2::Instance": {
+      "operation": "TerminateInstances",
+      "referencer":"",
+      "attrabuter":"",
+      "operations": {
+        "TerminateInstances":{
+          "waiter" : {
+            "name" :"InstanceTerminated",
+            "arguments":[ 
+                {
+                  "key":"InstanceIds",
+                  "Input":"TerminateInstancesInput",
+                  "value":"InstanceIds[]"
                 }
             ] 
           }

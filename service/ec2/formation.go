@@ -19,7 +19,7 @@ func (c *EC2) createAWSEC2Instance(input *RunInstancesInput) (r aws.Referencer, 
 	reservation, err := RunInstances(runinstancesrequest)
 	if err == nil {
 		describeinstancesrequest := &DescribeInstancesInput{}
-		if err := awsutil.CopyValue(describeinstancesrequest, "InstanceIds", runinstancesrequest, "Instances[].InstanceId"); err != nil {
+		if err := awsutil.CopyValue(describeinstancesrequest, "InstanceIds", reservation, "Instances[].InstanceId"); err != nil {
 			return nil, nil, err
 		}
 		if err := WaitUntilInstanceRunning(describeinstancesrequest); err != nil {
@@ -29,11 +29,14 @@ func (c *EC2) createAWSEC2Instance(input *RunInstancesInput) (r aws.Referencer, 
 	} else {
 		return nil, nil, err
 	}
-	runinstancesrequest := input
-	reservation, err := RunInstances(runinstancesrequest)
+	startinstancesrequest := &StartInstancesInput{}
+	if err := awsutil.CopyValue(startinstancesrequest, "InstanceIds", reservation, "Instances[].InstanceId"); err != nil {
+		return nil, nil, err
+	}
+	startinstancesresult, err := StartInstances(startinstancesrequest)
 	if err == nil {
 		describeinstancesrequest := &DescribeInstancesInput{}
-		if err := awsutil.CopyValue(describeinstancesrequest, "InstanceIds", runinstancesrequest, "Instances[].InstanceId"); err != nil {
+		if err := awsutil.CopyValue(describeinstancesrequest, "InstanceIds", reservation, "Instances[].InstanceId"); err != nil {
 			return nil, nil, err
 		}
 		if err := WaitUntilInstanceRunning(describeinstancesrequest); err != nil {
@@ -43,6 +46,5 @@ func (c *EC2) createAWSEC2Instance(input *RunInstancesInput) (r aws.Referencer, 
 	} else {
 		return nil, nil, err
 	}
-
 	return nil, nil, nil
 }

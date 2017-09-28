@@ -7,7 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"sort"
+	//	"sort"
 	"strings"
 	"text/template"
 )
@@ -36,6 +36,7 @@ type FormationCreator struct {
 	Name          string
 	OperationName string `json:"operation"`
 	Operations    map[string]*Formation
+	SortOpts      []*Formation
 	Referencer    string
 	Attrabuter    string
 }
@@ -98,6 +99,66 @@ func (a *API) AttachFormationCreators(filename string) {
 
 func (p *creatorDefinitions) setup() {
 	p.API.Creators = make(map[string]*FormationCreator)
+	/*	i, keys := 0, make([]string, len(p.Creators))
+		for k := range p.Creators {
+			keys[i] = k
+			i++
+		}*/
+	//sort.Strings(keys)
+	for k, e := range p.Creators {
+		e.API = p.API
+		e := p.Creators[k]
+		p.API.Creators[k] = e
+		nextopt := e.OperationName
+		e.Name = strings.Replace(k, "::", "", -1)
+		e.SortOpts = make([]*Formation, 0, len(e.Operations))
+		e.OperationName = p.ExportableName(e.OperationName)
+
+		for range e.Operations {
+			if o, ok := e.Operations[nextopt]; ok {
+				o.Operation = p.API.Operations[nextopt]
+				o.Input = strings.ToLower(o.Operation.InputRef.ShapeName)
+				o.Output = strings.ToLower(o.Operation.OutputRef.ShapeName)
+
+				if o.Waiter != nil {
+					o.Waiter.Waiter = p.API.waitersMap[o.Waiter.Name]
+					o.Waiter.Input = strings.ToLower(o.Waiter.Waiter.Operation.InputRef.ShapeName)
+					for _, a := range o.Waiter.Arguments {
+						inputs := strings.Split(a.Input, ".")
+						if inputs[1] == "Output" {
+							a.Input = e.Operations[inputs[0]].Output
+						} else {
+							a.Input = e.Operations[inputs[0]].Input
+						}
+					}
+
+				}
+
+				nextopt = o.Next
+				e.SortOpts = append(e.SortOpts, o)
+				o.NextFormation = e.Operations[o.Next]
+				if len(o.Arguments) > 0 {
+					for _, a := range o.Arguments {
+						inputs := strings.Split(a.Input, ".")
+						if inputs[1] == "Output" {
+							a.Input = e.Operations[inputs[0]].Output
+						} else {
+							a.Input = e.Operations[inputs[0]].Input
+						}
+					}
+				}
+			}
+		}
+		fmt.Println("--------------------", e.OperationName, len(e.SortOpts))
+	}
+}
+
+func (p *creatorDefinitions) initFormation() {
+
+}
+
+/*func (p *creatorDefinitions) setup() {
+	p.API.Creators = make(map[string]*FormationCreator)
 	i, keys := 0, make([]string, len(p.Creators))
 	for k := range p.Creators {
 		keys[i] = k
@@ -146,7 +207,7 @@ func (p *creatorDefinitions) setup() {
 		p.API.Creators[n] = e
 	}
 }
-
+*/
 var creatorTmpls = template.Must(template.New("creatorTmpls").Funcs(
 	template.FuncMap{
 		"titleCase": func(v string) string {
@@ -158,20 +219,24 @@ var creatorTmpls = template.Must(template.New("creatorTmpls").Funcs(
 	},
 ).Parse(`
 {{ define "creator"}}
-{{ $nextOpt := index  .Operations .OperationName -}}
-// create{{ .Name }} uses the {{ $nextOpt.Operation.API.NiceName }} API operation
+{{ $firstOpt := index  .Operations .OperationName -}}
+// create{{ .Name }} uses the {{ $firstOpt.Operation.API.NiceName }} API operation
 // {{ .OperationName }} to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *{{ .API.StructName }}) create{{ .Name }}(input {{ $nextOpt.Operation.InputRef.GoType }}) (r aws.Referencer,attr aws.Attrabuter,err error) {
+func (c *{{ .API.StructName }}) create{{ .Name }}(input {{ $firstOpt.Operation.InputRef.GoType }}) (r aws.Referencer,attr aws.Attrabuter,err error) {
 	
-	{{ $context := . -}}
-	{{ range $_, $_ := .Operations -}}
-	  	{{ if eq $nextOpt.Operation.Name $context.OperationName -}}
+	{{ $firstName := .OperationName -}}
+	{{ range $_, $nextOpt := .SortOpts -}}
+	  	{{ if eq $nextOpt.Operation.Name $firstName -}}
 			{{ $nextOpt.Input -}} := input
 		{{ else }}
+			{{ $nextOpt.Input}} := &{{ $nextOpt.Operation.InputRef.ShapeName }}{}
 			{{ range $_, $arg := $nextOpt.Arguments -}}
-				
+				if err := awsutil.CopyValue({{ $nextOpt.Input }} ,"{{ $arg.Key -}}",{{ $arg.Input }},"{{ $arg.Value }}");
+				 err != nil {
+					return nil,nil,err
+				}
 			{{ end -}}
 		{{ end -}}
 		{{ $nextOpt.Output -}} ,err := {{ $nextOpt.Operation.ExportedName -}}({{ $nextOpt.Input -}})
@@ -192,9 +257,6 @@ func (c *{{ .API.StructName }}) create{{ .Name }}(input {{ $nextOpt.Operation.In
 		}else{
 			return nil,nil,err
 		}
-   		{{ if $nextOpt.NextFormation -}}
-   		   {{ $nextOpt =   $nextOpt.NextFormation -}}
-   		{{- end }}
    	{{- end }}
 	return  nil,nil,nil
 }

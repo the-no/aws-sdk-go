@@ -22,6 +22,7 @@ type API struct {
 	Operations    map[string]*Operation
 	Shapes        map[string]*Shape
 	Creators      map[string]*FormationCreator
+	Deleters      map[string]*FormationCreator
 	Waiters       []*Waiter
 	Documentation string
 	Examples      Examples
