@@ -206,6 +206,8 @@ var creatorTmpls = template.Must(template.New("creatorTmpls").Funcs(
 func (c *{{ .API.StructName }}) create{{ .Name }}(input {{ $firstOpt.Operation.InputRef.GoType }}) (r aws.Referencer,attr aws.Attrabuter,err error) {
 	
 	{{ $firstName := .OperationName -}}
+	{{ $Referencer := .Referencer -}}
+	{{ $Attrabuter := .Attrabuter -}}
 	{{ range $_, $nextOpt := .SortOpts -}}
 	  	{{ if eq $nextOpt.Operation.Name $firstName -}}
 			{{ $nextOpt.Input -}} := input
@@ -225,11 +227,11 @@ func (c *{{ .API.StructName }}) create{{ .Name }}(input {{ $firstOpt.Operation.I
    			{{ range $_, $arg := $nextOpt.Waiter.Arguments -}}
 				if err := awsutil.CopyValue({{ $nextOpt.Waiter.Input }} ,"{{ $arg.Key -}}",{{ $arg.Input }},"{{ $arg.Value }}");
 				 err != nil {
-					return nil,nil,err
+					return {{ $Referencer }},{{ $Attrabuter }},err
 				}
 			{{ end -}}
 			if err :=  WaitUntil{{ $nextOpt.Waiter.Waiter.Name }}({{ $nextOpt.Waiter.Input}});err != nil{
-				return nil,nil,err
+				return {{ $Referencer }},{{ $Attrabuter }},err
 			}
    		{{- end }}
 
@@ -237,7 +239,7 @@ func (c *{{ .API.StructName }}) create{{ .Name }}(input {{ $firstOpt.Operation.I
 			return nil,nil,err
 		}
    	{{- end }}
-	return  {{ .Referencer }},{{ .Attrabuter }},nil
+	return  {{ $Referencer }},{{ $Attrabuter }},nil
 }
 {{- end }}
 `))

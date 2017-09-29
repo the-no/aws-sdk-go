@@ -21,10 +21,10 @@ func (c *EC2) createAWSEC2Instance(input *RunInstancesInput) (r aws.Referencer, 
 	if err == nil {
 		describeinstancesrequest := &DescribeInstancesInput{}
 		if err := awsutil.CopyValue(describeinstancesrequest, "InstanceIds", reservation, "Instances[].InstanceId"); err != nil {
-			return nil, nil, err
+			return reservation, reservation, err
 		}
 		if err := WaitUntilInstanceRunning(describeinstancesrequest); err != nil {
-			return nil, nil, err
+			return reservation, reservation, err
 		}
 
 	} else {
@@ -38,10 +38,10 @@ func (c *EC2) createAWSEC2Instance(input *RunInstancesInput) (r aws.Referencer, 
 	if err == nil {
 		describeinstancesrequest := &DescribeInstancesInput{}
 		if err := awsutil.CopyValue(describeinstancesrequest, "InstanceIds", reservation, "Instances[].InstanceId"); err != nil {
-			return nil, nil, err
+			return reservation, reservation, err
 		}
 		if err := WaitUntilInstanceRunning(describeinstancesrequest); err != nil {
-			return nil, nil, err
+			return reservation, reservation, err
 		}
 
 	} else {
