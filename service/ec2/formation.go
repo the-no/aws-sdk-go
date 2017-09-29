@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/the-no/aws-sdk-go/aws"
+	"github.com/the-no/aws-sdk-go/aws/awsutil"
 	"github.com/the-no/aws-sdk-go/aws/request"
 )
 
@@ -53,9 +54,10 @@ func (c *EC2) createAWSEC2Instance(input *RunInstancesInput) (r aws.Referencer, 
 // TerminateInstances to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) deleteAWSEC2Instance(input *TerminateInstancesInput) (err error) {
+func (c *EC2) deleteAWSEC2Instance(id string) (err error) {
 
-	terminateinstancesrequest := input
+	terminateinstancesrequest := &TerminateInstancesInput{}
+	terminateinstancesrequest.InstanceIds = append(terminateinstancesrequest.InstanceIds, &id)
 	terminateinstancesresult, err := TerminateInstances(terminateinstancesrequest)
 	if err == nil {
 		describeinstancesrequest := &DescribeInstancesInput{}
@@ -65,7 +67,6 @@ func (c *EC2) deleteAWSEC2Instance(input *TerminateInstancesInput) (err error) {
 		if err := WaitUntilInstanceTerminated(describeinstancesrequest); err != nil {
 			return err
 		}
-
 	} else {
 		return err
 	}

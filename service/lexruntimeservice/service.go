@@ -98,6 +98,10 @@ func (c *LexRuntimeService) newRequest(op *request.Operation, params, data inter
 	return req
 }
 
-func (c *LexRuntimeService) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
-	return nil, nil, nil, errors.New("Invail Resource Type!")
+func (c *LexRuntimeService) CreateResource(typ string, data []byte) (r aws.Referencer, attr aws.Attrabuter, err error) {
+	return nil, nil, errors.New("Invail Resource Type!")
+}
+
+func (c *LexRuntimeService) DeleteResource(typ string, r aws.Referencer) (err error) {
+	return errors.New("Invail Resource Type!")
 }

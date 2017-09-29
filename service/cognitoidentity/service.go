@@ -96,6 +96,10 @@ func (c *CognitoIdentity) newRequest(op *request.Operation, params, data interfa
 	return req
 }
 
-func (c *CognitoIdentity) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
-	return nil, nil, nil, errors.New("Invail Resource Type!")
+func (c *CognitoIdentity) CreateResource(typ string, data []byte) (r aws.Referencer, attr aws.Attrabuter, err error) {
+	return nil, nil, errors.New("Invail Resource Type!")
+}
+
+func (c *CognitoIdentity) DeleteResource(typ string, r aws.Referencer) (err error) {
+	return errors.New("Invail Resource Type!")
 }

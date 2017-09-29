@@ -96,6 +96,10 @@ func (c *ECS) newRequest(op *request.Operation, params, data interface{}) *reque
 	return req
 }
 
-func (c *ECS) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
-	return nil, nil, nil, errors.New("Invail Resource Type!")
+func (c *ECS) CreateResource(typ string, data []byte) (r aws.Referencer, attr aws.Attrabuter, err error) {
+	return nil, nil, errors.New("Invail Resource Type!")
+}
+
+func (c *ECS) DeleteResource(typ string, r aws.Referencer) (err error) {
+	return errors.New("Invail Resource Type!")
 }

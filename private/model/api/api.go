@@ -21,8 +21,8 @@ type API struct {
 	Metadata      Metadata
 	Operations    map[string]*Operation
 	Shapes        map[string]*Shape
-	Creators      []*Formation
-	Deleters      []*Formation
+	Creators      map[string]*Formation
+	Deleters      map[string]*Formation
 	Waiters       []*Waiter
 	Documentation string
 	Examples      Examples
@@ -61,6 +61,7 @@ type API struct {
 	BaseCrosslinkURL string
 
 	IsCreator bool
+	IsDeleter bool
 }
 
 // A Metadata is the metadata about an API's definition.
@@ -500,34 +501,35 @@ func (c *{{ .StructName }}) newRequest(op *request.Operation, params, data inter
 }
 
 
-func (c *{{ .StructName }}) CreateResource(typ string , data []byte) (intput ,output interface{} ,ref aws.Referencer, err error) {
+func (c *{{ .StructName }}) CreateResource(typ string , data []byte) (r aws.Referencer,attr aws.Attrabuter,err error){
 {{ if .IsCreator }}
 	switch typ {
-	{{ range $_, $v := .OperationList -}}
-	 	{{ if ne $v.Resource "" -}}
-			case "{{$v.Resource}}":
-				in := &{{ $v.InputRef.ShapeName -}}{}
-				if err := json.Unmarshal(data, in); err != nil {
-        		 return nil,nil,nil,err
-    			}
-    			if out ,err := c.{{ $v.ExportedName -}}(in); err != nil{
- 					return in,nil,nil,err
-    			}else{
-    				{{if $v.InputRef.Shape.ReferenceAction -}}
-    					return in,out,in,nil
-    				{{ else }}
-    					{{if  $v.OutputRef.Shape.ReferenceAction -}}
-    						return in,out,out,nil
-    					{{ else }}
-    						return in,out,nil,nil
-    					{{ end }}
-    				{{ end }}		
-    			}				
-		{{ end }}
+	{{ range $k, $v := .Creators -}}	
+		{{ $opt := index $v.Operations $v.OperationName -}}
+		case "{{$k}}":
+			in := &{{ $opt.Operation.InputRef.ShapeName -}}{}
+			if err := json.Unmarshal(data, in); err != nil {
+        		return nil,nil,nil,err
+    		}
+			return c.create{{$v.Name}}(in)			
 	{{ end }}
 	}
 {{ end -}}
-	return nil,nil,nil,errors.New("Invail Resource Type!")
+	return nil,nil,errors.New("Invail Resource Type!")
+}
+
+func (c *{{ .StructName }}) DeleteResource(typ  string ,r aws.Referencer) (err error){
+{{ if .IsDeleter }}
+	switch typ {
+	{{ range $k, $v := .Deleters -}}	
+		{{ $opt := index $v.Operations $v.OperationName -}}
+		case "{{$k}}":
+			id := r.Referencer()
+			return c.delete{{$v.Name}}(in)			
+	{{ end }}
+	}
+{{ end -}}
+	return errors.New("Invail Resource Type!")
 }
 `))
 

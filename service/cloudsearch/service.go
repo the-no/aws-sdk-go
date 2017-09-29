@@ -94,6 +94,10 @@ func (c *CloudSearch) newRequest(op *request.Operation, params, data interface{}
 	return req
 }
 
-func (c *CloudSearch) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
-	return nil, nil, nil, errors.New("Invail Resource Type!")
+func (c *CloudSearch) CreateResource(typ string, data []byte) (r aws.Referencer, attr aws.Attrabuter, err error) {
+	return nil, nil, errors.New("Invail Resource Type!")
+}
+
+func (c *CloudSearch) DeleteResource(typ string, r aws.Referencer) (err error) {
+	return errors.New("Invail Resource Type!")
 }

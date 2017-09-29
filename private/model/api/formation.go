@@ -34,6 +34,7 @@ type Argument struct {
 type Formation struct {
 	API           *API `json:"-"`
 	Name          string
+	IdField       string
 	OperationName string `json:"operation"`
 	Operations    map[string]*FormationOpt
 	SortOpts      []*FormationOpt
@@ -62,11 +63,18 @@ type FormationOpt struct {
 // this API.
 func (a *API) FormationGoCode() string {
 	var buf bytes.Buffer
-	fmt.Fprintf(&buf, "import (\n%q\n\n%q\n%q\n)",
-		"time",
-		"github.com/the-no/aws-sdk-go/aws",
-		"github.com/the-no/aws-sdk-go/aws/request",
-	)
+	if a.IsCreator || a.IsDeleter {
+		fmt.Fprintf(&buf, "import (\n%q\n\n%q\n%q\n%q\n)",
+			"time",
+			"github.com/the-no/aws-sdk-go/aws",
+			"github.com/the-no/aws-sdk-go/aws/request",
+			"github.com/the-no/aws-sdk-go/aws/awsutil")
+	} else {
+		fmt.Fprintf(&buf, "import (\n%q\n\n%q\n%q\n)",
+			"time",
+			"github.com/the-no/aws-sdk-go/aws",
+			"github.com/the-no/aws-sdk-go/aws/request")
+	}
 
 	for _, c := range a.Creators {
 		buf.WriteString(c.GoCreatorCode())
@@ -103,8 +111,11 @@ func (a *API) AttachFormations(filename string) {
 }
 
 func (p *creatorDeleterDefinitions) setup() {
-	p.API.Creators = make([]*Formation, 0, len(p.Creators))
-	p.API.Deleters = make([]*Formation, 0, len(p.Deleters))
+	p.API.Creators = make(map[string]*Formation)
+	p.API.Deleters = make(map[string]*Formation)
+	if len(p.Creators) > 0 {
+		p.API.IsCreator = true
+	}
 	for k, e := range p.Creators {
 		e.Name = strings.Replace(k, "::", "", -1)
 		p.resolveFormation(e)
@@ -121,14 +132,17 @@ func (p *creatorDeleterDefinitions) setup() {
 		} else {
 			e.Attrabuter = e.Operations[attrs[0]].Input
 		}
-		p.API.Creators = append(p.API.Creators, e)
+		p.API.Creators[k] = e
 
 	}
 
+	if len(p.Deleters) > 0 {
+		p.API.IsDeleter = true
+	}
 	for k, e := range p.Deleters {
 		e.Name = strings.Replace(k, "::", "", -1)
 		p.resolveFormation(e)
-		p.API.Deleters = append(p.API.Deleters, e)
+		p.API.Deleters[k] = e
 	}
 }
 
@@ -241,12 +255,19 @@ var deleterTmpls = template.Must(template.New("deleterTmpls").Funcs(
 // {{ .OperationName }} to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *{{ .API.StructName }}) delete{{ .Name }}(input {{ $firstOpt.Operation.InputRef.GoType }}) (err error) {
+func (c *{{ .API.StructName }}) delete{{ .Name }}(id string) (err error) {
 	
 	{{ $firstName := .OperationName -}}
+	{{ $IdField :=  .IdField}}
 	{{ range $_, $nextOpt := .SortOpts -}}
 	  	{{ if eq $nextOpt.Operation.Name $firstName -}}
-			{{ $nextOpt.Input -}} := input
+	  	 	{{ $IdMember := index $nextOpt.Operation.InputRef.Shape.MemberRefs $IdField -}}
+	  		{{ if ne $IdMember.Shape.Type  "list" -}}
+				{{ $nextOpt.Input -}} := &{{ $nextOpt.Operation.InputRef.ShapeName }}{ {{ $IdField -}}:&id}
+	  		{{ else }}
+	  			{{ $nextOpt.Input -}} := &{{ $nextOpt.Operation.InputRef.ShapeName }}{}
+	  			{{ $nextOpt.Input -}}.{{$IdField}} = append({{ $nextOpt.Input -}}.{{$IdField}},&id)
+	  		{{ end -}}
 		{{ else }}
 			{{ $nextOpt.Input}} := &{{ $nextOpt.Operation.InputRef.ShapeName }}{}
 			{{ range $_, $arg := $nextOpt.Arguments -}}

@@ -99,6 +99,10 @@ func (c *CostandUsageReportService) newRequest(op *request.Operation, params, da
 	return req
 }
 
-func (c *CostandUsageReportService) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
-	return nil, nil, nil, errors.New("Invail Resource Type!")
+func (c *CostandUsageReportService) CreateResource(typ string, data []byte) (r aws.Referencer, attr aws.Attrabuter, err error) {
+	return nil, nil, errors.New("Invail Resource Type!")
+}
+
+func (c *CostandUsageReportService) DeleteResource(typ string, r aws.Referencer) (err error) {
+	return errors.New("Invail Resource Type!")
 }

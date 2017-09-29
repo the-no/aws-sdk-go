@@ -95,23 +95,27 @@ func (c *EC2) newRequest(op *request.Operation, params, data interface{}) *reque
 	return req
 }
 
-func (c *EC2) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
+func (c *EC2) CreateResource(typ string, data []byte) (r aws.Referencer, attr aws.Attrabuter, err error) {
 
 	switch typ {
-
 	case "AWS::EC2::Instance":
 		in := &RunInstancesInput{}
 		if err := json.Unmarshal(data, in); err != nil {
 			return nil, nil, nil, err
 		}
-		if out, err := c.RunInstances(in); err != nil {
-			return in, nil, nil, err
-		} else {
-
-			return in, out, out, nil
-
-		}
+		return c.createAWSEC2Instance(in)
 
 	}
-	return nil, nil, nil, errors.New("Invail Resource Type!")
+	return nil, nil, errors.New("Invail Resource Type!")
+}
+
+func (c *EC2) DeleteResource(typ string, r aws.Referencer) (err error) {
+
+	switch typ {
+	case "AWS::EC2::Instance":
+		id := r.Referencer()
+		return c.deleteAWSEC2Instance(in)
+
+	}
+	return errors.New("Invail Resource Type!")
 }

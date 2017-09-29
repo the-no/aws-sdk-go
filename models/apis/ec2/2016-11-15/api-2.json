@@ -1987,7 +1987,6 @@
     },
     "RunInstances":{
       "name":"RunInstances",
-      "resource":"AWS::EC2::Instance",
       "http":{
         "method":"POST",
         "requestUri":"/"

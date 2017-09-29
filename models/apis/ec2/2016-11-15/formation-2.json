@@ -45,6 +45,7 @@
   "deleters": {
     "AWS::EC2::Instance": {
       "operation": "TerminateInstances",
+      "IdField":"InstanceIds",
       "referencer":"",
       "operations": {
         "TerminateInstances":{

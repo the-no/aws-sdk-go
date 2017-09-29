@@ -99,6 +99,10 @@ func (c *MarketplaceCommerceAnalytics) newRequest(op *request.Operation, params,
 	return req
 }
 
-func (c *MarketplaceCommerceAnalytics) CreateResource(typ string, data []byte) (intput, output interface{}, ref aws.Referencer, err error) {
-	return nil, nil, nil, errors.New("Invail Resource Type!")
+func (c *MarketplaceCommerceAnalytics) CreateResource(typ string, data []byte) (r aws.Referencer, attr aws.Attrabuter, err error) {
+	return nil, nil, errors.New("Invail Resource Type!")
+}
+
+func (c *MarketplaceCommerceAnalytics) DeleteResource(typ string, r aws.Referencer) (err error) {
+	return errors.New("Invail Resource Type!")
 }
