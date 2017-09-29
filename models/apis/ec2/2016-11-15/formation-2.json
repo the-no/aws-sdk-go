@@ -3,8 +3,8 @@
   "creators": {
     "AWS::EC2::Instance": {
       "operation": "RunInstances",
-      "referencer":"",
-      "attrabuter":"",
+      "referencer":"RunInstances.Output",
+      "attrabuter":"RunInstances.Output",
       "operations": {
         "RunInstances":{
           "next":"StartInstances",
@@ -46,7 +46,6 @@
     "AWS::EC2::Instance": {
       "operation": "TerminateInstances",
       "referencer":"",
-      "attrabuter":"",
       "operations": {
         "TerminateInstances":{
           "waiter" : {
@@ -54,7 +53,7 @@
             "arguments":[ 
                 {
                   "key":"InstanceIds",
-                  "Input":"TerminateInstancesInput",
+                  "Input":"TerminateInstances.Input",
                   "value":"InstanceIds[]"
                 }
             ] 

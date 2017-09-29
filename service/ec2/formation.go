@@ -46,5 +46,28 @@ func (c *EC2) createAWSEC2Instance(input *RunInstancesInput) (r aws.Referencer, 
 	} else {
 		return nil, nil, err
 	}
-	return nil, nil, nil
+	return reservation, reservation, nil
+}
+
+// deleteAWSEC2Instance uses the Amazon EC2 API operation
+// TerminateInstances to wait for a condition to be met before returning.
+// If the condition is not met within the max attempt window, an error will
+// be returned.
+func (c *EC2) deleteAWSEC2Instance(input *TerminateInstancesInput) (err error) {
+
+	terminateinstancesrequest := input
+	terminateinstancesresult, err := TerminateInstances(terminateinstancesrequest)
+	if err == nil {
+		describeinstancesrequest := &DescribeInstancesInput{}
+		if err := awsutil.CopyValue(describeinstancesrequest, "InstanceIds", terminateinstancesrequest, "InstanceIds[]"); err != nil {
+			return err
+		}
+		if err := WaitUntilInstanceTerminated(describeinstancesrequest); err != nil {
+			return err
+		}
+
+	} else {
+		return err
+	}
+	return nil
 }

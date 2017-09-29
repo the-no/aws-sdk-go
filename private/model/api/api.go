@@ -21,8 +21,8 @@ type API struct {
 	Metadata      Metadata
 	Operations    map[string]*Operation
 	Shapes        map[string]*Shape
-	Creators      map[string]*FormationCreator
-	Deleters      map[string]*FormationCreator
+	Creators      []*Formation
+	Deleters      []*Formation
 	Waiters       []*Waiter
 	Documentation string
 	Examples      Examples

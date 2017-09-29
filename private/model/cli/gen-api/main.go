@@ -64,7 +64,7 @@ func newGenerateInfo(modelFile, svcPath, svcImportPath string) *generateInfo {
 
 	formationFile := strings.Replace(modelFile, "api-2.json", "formation-2.json", -1)
 	if _, err := os.Stat(formationFile); err == nil {
-		g.API.AttachFormationCreators(formationFile)
+		g.API.AttachFormations(formationFile)
 	} else if !os.IsNotExist(err) {
 		fmt.Println("formation-2.json error:", err)
 	}
@@ -299,7 +299,7 @@ func writeFormationsFile(g *generateInfo) error {
 		codeLayout,
 		"",
 		g.API.PackageName(),
-		g.API.FormationCreatorGoCode(),
+		g.API.FormationGoCode(),
 	)
 }
 
